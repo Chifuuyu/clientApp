@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
-import { prisma } from "../server/db/client";
 
-const Home: NextPage = (props:any) => {
-  const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+export default function Home (props:any) {
+  const listing = trpc.useQuery(["example.getAll"]);
   return (
     <>
       <Head>
@@ -18,23 +17,10 @@ const Home: NextPage = (props:any) => {
            <a href="#"><span className="text-purple-300 hover:text-gray-700">New Listing </span></a>or <a href="#"><span className="text-orange-300 hover:text-gray-700">Under Contract</span></a>
         </h1>
         <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
-          {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
+          console.log(listing.data)
+          {listing.data ? <p>{listing.data[0]?.seller1}</p> : <p>Loading..</p>}
         </div>
-        <code>
-          {props.listings}
-        </code>
       </main>
     </>
   );
 };
-
-export default Home;
-
-export const getServerSideProps = async () => {
-  const listings = await prisma.newListing.findMany();
-  return {
-    props: {
-      listings: JSON.stringify(listings),
-    },
-  };
-}
