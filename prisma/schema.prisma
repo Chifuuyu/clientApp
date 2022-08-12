@@ -65,7 +65,7 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-model NewListing{
+model NewListing {
     id                  String @id @default(cuid())
     clientNames         String?
     propertyAddress     String?

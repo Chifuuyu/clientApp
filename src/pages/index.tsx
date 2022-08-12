@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
+import { prisma } from "../server/db/client";
 
 type TechnologyCardProps = {
   name: string;
@@ -8,7 +9,7 @@ type TechnologyCardProps = {
   documentation: string;
 };
 
-const Home: NextPage = () => {
+const Home: NextPage = (props:any) => {
   const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
 
   return (
@@ -49,6 +50,9 @@ const Home: NextPage = () => {
         <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
           {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
         </div>
+        <code>
+          {props.listings}
+        </code>
       </main>
     </>
   );
@@ -76,3 +80,12 @@ const TechnologyCard = ({
 };
 
 export default Home;
+
+export const getServerSideProps = async () => {
+  const listings = await prisma.newListing.findMany();
+  return {
+    props: {
+      listings: JSON.stringify(listings),
+    },
+  };
+}
