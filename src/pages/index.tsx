@@ -3,15 +3,8 @@ import Head from "next/head";
 import { trpc } from "../utils/trpc";
 import { prisma } from "../server/db/client";
 
-type TechnologyCardProps = {
-  name: string;
-  description: string;
-  documentation: string;
-};
-
 const Home: NextPage = (props:any) => {
   const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
-
   return (
     <>
       <Head>
@@ -22,7 +15,7 @@ const Home: NextPage = (props:any) => {
 
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
-           <span className="text-purple-300 motion-safe:hover:scale-105">New Listing</span> or <span className="text-orange-300 motion-safe:hover:scale-105">Under Contract</span>
+           <a className="hover:bg-gray-700"><span className="text-purple-300">New Listing</span></a>or <a className="hover:bg-gray-700"><span className="text-orange-300 motion-safe:hover:scale-105">Under Contract</span></a>
         </h1>
         <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
           {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
