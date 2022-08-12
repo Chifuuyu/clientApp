@@ -4,6 +4,7 @@ import { trpc } from "../utils/trpc";
 
 export default function Home (props:any) {
   const listing = trpc.useQuery(["example.getAll"]);
+  console.log(listing.data)
   return (
     <>
       <Head>
@@ -16,7 +17,6 @@ export default function Home (props:any) {
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
            <a href="#"><span className="text-purple-300 hover:text-gray-700">New Listing </span></a>or <a href="#"><span className="text-orange-300 hover:text-gray-700">Under Contract</span></a>
         </h1>
-        console.log(listing.data)
         <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
           {listing.data ? <p>{listing.data[0]?.seller1}</p> : <p>Loading..</p>}
         </div>
