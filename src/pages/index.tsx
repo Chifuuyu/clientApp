@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Link from 'next/link';
+import router, { useRouter } from 'next/router';
 import { trpc } from "../utils/trpc";
 
 const ClientNameCreator: React.FC = () => {
@@ -35,7 +37,7 @@ export default function Home () {
 
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
-           <a href="#"><span className="text-purple-300 hover:text-gray-700">New Listing </span></a>or <a href="#"><span className="text-orange-300 hover:text-gray-700">Under Contract</span></a>
+        <Link href="/"><a className={router.pathname == "/" ? "active" : ""}><span className="text-purple-300 active:text-gray-700">New Listing </span></a></Link>or <Link href="/"><a className={router.pathname == "/" ? "active" : ""}><span className="text-orange-300 active:text-gray-700">Under Contract</span></a></Link>
         </h1>
         <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
           {listing.data ? 
