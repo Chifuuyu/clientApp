@@ -22,19 +22,6 @@ return (
 );
 };
 
-const ButtonToggle = () => {
-  const [active, setActive] = useState(false)
- 
-  return (
-   <div className="content">
-    <h2>Toggle me</h2>
-    <div onClick={() => setActive((a: any) => !a)} className={`toggle-container ${active ? 'active' : ''}`}>
-     <div className="toggle" />
-    </div>
-   </div>
-  )
- }
-
 export default function Home () {
 
   const listing = trpc.useQuery(["form-client.get-all"]);
@@ -48,7 +35,7 @@ export default function Home () {
 
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
-           <a href="#"><span className="text-purple-300 active:text-gray-700">New Listing </span></a>or <a href="#"><span className="text-orange-300 active:hover:text-gray-700">Under Contract</span></a>
+           <a href="#"><span className="text-purple-300 hover:text-gray-700">New Listing </span></a>or <a href="#"><span className="text-orange-300 hover:text-gray-700">Under Contract</span></a>
         </h1>
         <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
           {listing.data ? 
@@ -60,20 +47,15 @@ export default function Home () {
               <div key={Client.id} className="my-2">
                 {Client.clientNames}
                 </div>
-              );
+                );
             })} 
             </div>
             </div>
             <ClientNameCreator /> 
             </div> 
             : <p>Loading..</p>}
-            <ButtonToggle/>
         </div>
       </main>
     </>
   );
 };
-
-function useState(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.");
-}
