@@ -1,6 +1,6 @@
-import Example from './example';
-import Header from './head';
-import HomePath from "./link";
+import Example from './components/example';'';
+import Header from './components/head';
+import HomePath from "./components/link";
 
 export default function Home () {
   return (
