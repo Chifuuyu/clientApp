@@ -22,6 +22,19 @@ return (
 );
 };
 
+const ButtonToggle = () => {
+  const [active, setActive] = useState(false)
+ 
+  return (
+   <div className="content">
+    <h2>Toggle me</h2>
+    <div onClick={() => setActive((a: any) => !a)} className={`toggle-container ${active ? 'active' : ''}`}>
+     <div className="toggle" />
+    </div>
+   </div>
+  )
+ }
+
 export default function Home () {
 
   const listing = trpc.useQuery(["form-client.get-all"]);
@@ -54,8 +67,13 @@ export default function Home () {
             <ClientNameCreator /> 
             </div> 
             : <p>Loading..</p>}
+            <ButtonToggle/>
         </div>
       </main>
     </>
   );
 };
+
+function useState(arg0: boolean): [any, any] {
+  throw new Error("Function not implemented.");
+}
