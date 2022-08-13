@@ -3,7 +3,7 @@ import Head from "next/head";
 import { trpc } from "../utils/trpc";
 
 export default function Home (props:any) {
-  const listing = trpc.useQuery(["example.getAll"]);
+  const listing = trpc.useQuery(["example.get-all"]);
   console.log(listing.data)
   return (
     <>
