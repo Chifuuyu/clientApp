@@ -2,12 +2,21 @@ import Head from "next/head";
 import { trpc } from "../utils/trpc";
 
 const ClientNameCreator: React.FC = () => {
-  const {mutate} = trpc.useMutation("form-client.create");
+  const client = trpc.useContext();
+  const {mutate} = trpc.useMutation("form-client.create", {
+    onSuccess: () => {
+      client.invalidateQueries("form-client.get-all");
+    },
+  });
 
 return (
   <input 
-    onSubmit={(ev)=>{
-      console.log("value", ev.currentTarget.value);
+    onKeyDown={(ev)=>{
+      if (ev.key === "Enter") {
+        console.log("Enter pressed!", ev.currentTarget.value);
+        mutate({clientNames: ev.currentTarget.value});
+        ev.currentTarget.value = "";
+        }
     }}
     ></input>
 );
@@ -33,7 +42,13 @@ export default function Home () {
           <div className="p-6 flex flex-col">
             <div className="flex flex-col">
             <div className="text-2xl font-bold"> Client Names<div/>
-            {listing.data[0]?.clientNames} 
+            {listing.data.map((Client) => {
+              return (
+              <div key={Client.id} className="my-2">
+                {Client.clientNames}
+                </div>
+              );
+            })} 
             </div>
             </div>
             <ClientNameCreator /> 
