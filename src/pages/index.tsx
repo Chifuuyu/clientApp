@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from 'next/link';
-import router, { useRouter } from 'next/router';
+import router from 'next/router';
 import { trpc } from "../utils/trpc";
 
 const ClientNameCreator: React.FC = () => {
