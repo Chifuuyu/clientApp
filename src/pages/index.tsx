@@ -1,10 +1,21 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
 
-export default function Home (props:any) {
-  const listing = trpc.useQuery(["example.get-all"]);
-  console.log(listing.data)
+const ClientNameCreator: React.FC = () => {
+  const {mutate} = trpc.useMutation("form-client.create");
+
+return (
+  <input 
+    onSubmit={(ev)=>{
+      console.log("value", ev.currentTarget.value);
+    }}
+    ></input>
+);
+};
+
+export default function Home () {
+
+  const listing = trpc.useQuery(["form-client.get-all"]);
   return (
     <>
       <Head>
@@ -18,7 +29,16 @@ export default function Home (props:any) {
            <a href="#"><span className="text-purple-300 hover:text-gray-700">New Listing </span></a>or <a href="#"><span className="text-orange-300 hover:text-gray-700">Under Contract</span></a>
         </h1>
         <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
-          {listing.data ? <p>{listing.data[0]?.seller1}</p> : <p>Loading..</p>}
+          {listing.data ? 
+          <div className="p-6 flex flex-col">
+            <div className="flex flex-col">
+            <div className="text-2xl font-bold"> Client Names<div/>
+            {listing.data[0]?.clientNames} 
+            </div>
+            </div>
+            <ClientNameCreator /> 
+            </div> 
+            : <p>Loading..</p>}
         </div>
       </main>
     </>
