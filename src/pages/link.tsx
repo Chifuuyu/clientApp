@@ -12,7 +12,7 @@ return(
     </Link>or 
     <Link href="/">
         <a className={currentRoute == "/" ? "active" : "non-active"}>
-            <span className="text-orange-300 active:text-gray-700">Under Contract</span></a>
+            <span className="text-orange-300 active:text-gray-700"> Under Contract</span></a>
             </Link>
 </h1>
 );
