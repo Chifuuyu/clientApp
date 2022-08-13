@@ -6,10 +6,8 @@ export default function HomePath() {
   const currentRoute = router.pathname;
   return (
     <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
-      <Link href="/">
-        <a
-          className={currentRoute == "./new-listing" ? "active" : "non-active"}
-        >
+      <Link href="/new-listing">
+        <a className={currentRoute == "/new-listing" ? "active" : "non-active"}>
           <span className="text-purple-300 active:text-gray-700">
             New Listing{" "}
           </span>
